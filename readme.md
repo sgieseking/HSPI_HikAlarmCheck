@@ -16,6 +16,7 @@ See HomeSeer forum thread "Really simple C# sample plugin available here!" <http
 ## Compatibility
 Tested on the following platforms:
 * Windows 10 with Visual Studio 2015 
+* Ubuntu 14.04 with Mono 3.2.8
 
 ## License
 HikAlarmCheck is available under [The MIT license](http://opensource.org/licenses/MIT).  

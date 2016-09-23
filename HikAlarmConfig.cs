@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 using System;
-using static Scheduler.PageBuilderAndMenu;
+using Scheduler;
 using System.Text;
 using System.Web;
 using System.Collections.Specialized;
@@ -114,7 +114,7 @@ namespace HSPI_HikAlarmCheck
                 // Add the title
                 AddHeader(plugin.HsApplication.GetPageHeader(Name, "Hik Alarm Check Configuration", "", "", false, false));
 
-                stb.Append(clsPageBuilder.DivStart("pluginpage", ""));
+				stb.Append(PageBuilderAndMenu.clsPageBuilder.DivStart("pluginpage", ""));
 
                 // a message area for error messages from jquery ajax postback (optional, only needed if using AJAX calls to get data)
                 //stb.Append(clsPageBuilder.DivStart("errormessage", "class='errormessage'"));
@@ -127,7 +127,7 @@ namespace HSPI_HikAlarmCheck
                 // Add the 
                 stb.Append(BuildWebPageBody());
 
-                stb.Append(clsPageBuilder.DivEnd());
+				stb.Append(PageBuilderAndMenu.clsPageBuilder.DivEnd());
 
                 // Add the body html to the page
                 AddBody(stb.ToString());
@@ -179,7 +179,7 @@ namespace HSPI_HikAlarmCheck
                 // Add new item section
                 stb.Append(" <tr>");
                 stb.Append("  <td colspan='2'>");
-                stb.Append(clsPageBuilder.FormStart("frmAddCamera", "AddCamera", "Post"));
+				stb.Append(PageBuilderAndMenu.clsPageBuilder.FormStart("frmAddCamera", "AddCamera", "Post"));
                 stb.Append("   <table width='1000' cellpadding='0' cellspacing='0' style='border-right: black thin solid; border-top: black thin solid; border-left: black thin solid; border-bottom: black thin solid;'>");
                 stb.Append("    <tr><td style='background-color: #Cdcdcd; text-align: center;'><br /></td></tr>");
                 stb.Append("    <tr>");
@@ -196,14 +196,14 @@ namespace HSPI_HikAlarmCheck
                 stb.Append("     </td>");
                 stb.Append("    </tr>");
                 stb.Append("   </table>");
-                stb.Append(clsPageBuilder.FormEnd());
+				stb.Append(PageBuilderAndMenu.clsPageBuilder.FormEnd());
                 stb.Append("  </td>");
                 stb.Append(" </tr>");
 
                 // Select item to edit
                 stb.Append(" <tr>");
                 stb.Append("  <td colspan='2'>");
-                stb.Append(clsPageBuilder.FormStart("frmEditCamera", "EditCamera", "Post"));
+				stb.Append(PageBuilderAndMenu.clsPageBuilder.FormStart("frmEditCamera", "EditCamera", "Post"));
                 stb.Append("   <table width='1000' cellpadding='0' cellspacing='0' style='border-right: black thin solid; border-top: none; border-left: black thin solid; border-bottom: black thin solid;'>");
                 stb.Append("    <tr><td style='background-color: #Cdcdcd; text-align: center;'><br /></td></tr>");
                 stb.Append("    <tr>");
@@ -225,7 +225,7 @@ namespace HSPI_HikAlarmCheck
                 stb.Append("     </td>");
                 stb.Append("    </tr>");
                 stb.Append("   </table>");
-                stb.Append(clsPageBuilder.FormEnd());
+				stb.Append(PageBuilderAndMenu.clsPageBuilder.FormEnd());
                 stb.Append("  </td>");
                 stb.Append(" </tr>");
 

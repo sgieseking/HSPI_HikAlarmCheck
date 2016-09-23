@@ -19,7 +19,6 @@
 // THE SOFTWARE.
 
 using HomeSeerAPI;
-using static Scheduler.PageBuilderAndMenu;
 using Scheduler;
 using System.Collections.Specialized;
 
@@ -35,7 +34,7 @@ namespace HSPI_Template
     /// </list>
     /// </summary>
     /// <seealso cref="Scheduler.PageBuilderAndMenu.clsPageBuilder" />
-    class PageBuilder : clsPageBuilder
+	class PageBuilder : PageBuilderAndMenu.clsPageBuilder
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HikAlarmPageBuilder"/> class.

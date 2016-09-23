@@ -22,8 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using HomeSeerAPI;
-using static HomeSeerAPI.DeviceTypeInfo_m;
-using static HomeSeerAPI.VSVGPairs;
 using HSCF.Communication.Scs.Communication.EndPoints.Tcp;
 using HSCF.Communication.ScsServices.Client;
 using HSPI_Template;
@@ -228,9 +226,9 @@ namespace HSPI_HikAlarmCheck
                 dv = (Scheduler.Classes.DeviceClass)hs.GetDeviceByRef(refId);
                 dv.set_Address(hs, "Camera" + refId);
                 dv.set_Device_Type_String(hs, "HikVision Camera Alarm");
-                DeviceTypeInfo DT = new DeviceTypeInfo();
-                DT.Device_API = DeviceTypeInfo.eDeviceAPI.Security;
-                DT.Device_Type = (int)DeviceTypeInfo.eDeviceType_Security.Zone_Interior;
+				DeviceTypeInfo_m.DeviceTypeInfo DT = new DeviceTypeInfo_m.DeviceTypeInfo();
+				DT.Device_API = DeviceTypeInfo_m.DeviceTypeInfo.eDeviceAPI.Security;
+				DT.Device_Type = (int)DeviceTypeInfo_m.DeviceTypeInfo.eDeviceType_Security.Zone_Interior;
                 dv.set_DeviceType_Set(hs, DT);
                 dv.set_Interface(hs, IFACE_NAME);
                 dv.set_InterfaceInstance(hs, "");
@@ -238,20 +236,20 @@ namespace HSPI_HikAlarmCheck
                 dv.set_Location(hs, "Camera"); // room
                 dv.set_Location2(hs, "HikVision"); // floor
 
-                VSPair Pair = new VSPair(HomeSeerAPI.ePairStatusControl.Status);
-                Pair.PairType = VSVGPairType.SingleValue;
+				VSVGPairs.VSPair Pair = new VSVGPairs.VSPair(HomeSeerAPI.ePairStatusControl.Status);
+				Pair.PairType = VSVGPairs.VSVGPairType.SingleValue;
                 Pair.Value = -1;
                 Pair.Status = "Unknown";
                 Default_VS_Pairs_AddUpdateUtil(refId, Pair);
 
-                Pair = new VSPair(HomeSeerAPI.ePairStatusControl.Status);
-                Pair.PairType = VSVGPairType.SingleValue;
+				Pair = new VSVGPairs.VSPair(HomeSeerAPI.ePairStatusControl.Status);
+				Pair.PairType = VSVGPairs.VSVGPairType.SingleValue;
                 Pair.Value = 0;
                 Pair.Status = "No Motion";
                 Default_VS_Pairs_AddUpdateUtil(refId, Pair);
 
-                Pair = new VSPair(HomeSeerAPI.ePairStatusControl.Status);
-                Pair.PairType = VSVGPairType.SingleValue;
+				Pair = new VSVGPairs.VSPair(HomeSeerAPI.ePairStatusControl.Status);
+				Pair.PairType = VSVGPairs.VSVGPairType.SingleValue;
                 Pair.Value = 1;
                 Pair.Status = "Motion";
                 Default_VS_Pairs_AddUpdateUtil(refId, Pair);
@@ -269,14 +267,14 @@ namespace HSPI_HikAlarmCheck
         /// </summary>
         /// <param name="refId">The device reference identifier for HomeSeer.</param>
         /// <param name="Pair">The value/status pair.</param>
-        private void Default_VS_Pairs_AddUpdateUtil(int refId, VSPair Pair)
+		private void Default_VS_Pairs_AddUpdateUtil(int refId, VSVGPairs.VSPair Pair)
         {
             if ((Pair == null) || (refId < 1) || (!hs.DeviceExistsRef(refId)))
                 return;
 
             try
             {
-                VSPair Existing = hs.DeviceVSP_Get(refId, Pair.Value, Pair.ControlStatus);
+				VSVGPairs.VSPair Existing = hs.DeviceVSP_Get(refId, Pair.Value, Pair.ControlStatus);
                 if (Existing != null)
                 {
                     // This is unprotected, so it is a user's value/ status pair.
