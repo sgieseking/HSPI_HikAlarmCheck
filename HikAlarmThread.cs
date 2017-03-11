@@ -298,7 +298,6 @@ namespace HSPI_HikAlarmCheck
 
                                     // Encode the data string into a byte array.
                                     string header = "GET /Event/notification/alertStream HTTP/1.1\r\n"
-                                                    + "Host: 192.168.129.65\r\n"
                                                     + "Authorization: Basic " + authenticationStr + "\r\n"
                                                     + "Connection: keep-alive\r\n"
                                                     + "\r\n";
