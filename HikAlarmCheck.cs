@@ -98,6 +98,8 @@ namespace HSPI_HikAlarmCheck
             {
                 Console.WriteLine("Unhandled exception from Plugin: " + ex.Message);
             }
+            Console.WriteLine("Hik Alarm Check Plugin Exit");
+            System.Environment.Exit(0);
         }
     }
 }
