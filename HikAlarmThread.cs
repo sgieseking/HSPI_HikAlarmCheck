@@ -138,6 +138,7 @@ namespace HSPI_HikAlarmCheck
         private HSPI plugin;
         private int refId;
         private string ipAddressStr;
+        private int port;
         private string username;
         private string password;
 
@@ -206,7 +207,10 @@ namespace HSPI_HikAlarmCheck
         {
             this.plugin = plugin;
             this.refId = refId;
-            this.ipAddressStr = ipAddressStr;
+            String[] substrings = ipAddressStr.Split(':');
+            this.ipAddressStr = substrings[0];
+            if ((substrings.Length == 1) || (!Int32.TryParse(substrings[1], out port)))
+                port = 80;  // default port
             this.username = username;
             this.password = password;
 
@@ -262,7 +266,7 @@ namespace HSPI_HikAlarmCheck
 
                 // Establish the remote endpoint for the socket.
                 IPAddress ipAddress = IPAddress.Parse(ipAddressStr);
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 80);
+                IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
                 string authenticationStr = Base64Encode(username + ":" + password);
 
 
@@ -460,7 +464,7 @@ namespace HSPI_HikAlarmCheck
         private void LogMessage(string msg)
         {
             string timeStr = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            Console.WriteLine("{0} IpAddress: {1}, {2}", timeStr, ipAddressStr, msg);
+            Console.WriteLine("{0} IpAddress: {1}:{2}, {3}", timeStr, ipAddressStr, port, msg);
         }
     }
 }
