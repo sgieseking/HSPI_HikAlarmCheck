@@ -269,7 +269,6 @@ namespace HSPI_HikAlarmCheck
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
                 string authenticationStr = Base64Encode(username + ":" + password);
 
-
                 while (!hikClientShutdown)
                 {
                     try
@@ -297,7 +296,7 @@ namespace HSPI_HikAlarmCheck
                                     LogMessage("Connected to camera");
 
                                     // Encode the data string into a byte array.
-                                    string header = "GET /Event/notification/alertStream HTTP/1.1\r\n"
+                                    string header = "GET /ISAPI/Event/notification/alertStream HTTP/1.1\r\n"
                                                     + "Authorization: Basic " + authenticationStr + "\r\n"
                                                     + "Connection: keep-alive\r\n"
                                                     + "\r\n";
@@ -326,7 +325,7 @@ namespace HSPI_HikAlarmCheck
 
                                     // Check if too long between messages
                                     TimeSpan span = DateTime.Now - lastAlertMsg;
-                                    if (span.TotalMilliseconds > 2000)
+                                    if (span.TotalMilliseconds > 20000)
                                     {
                                         // Attempt to reconnect
                                         LogMessage(span.TotalMilliseconds.ToString() + " ms since last message. Attempt to reconnect.");
@@ -444,6 +443,10 @@ namespace HSPI_HikAlarmCheck
                 }
                 // remove data through the boundary
                 buffer = buffer.Substring(index + xmlEndStr.Length);
+            }
+            else
+            {
+                //LogMessage("Data: " + buffer.ToString());
             }
         }
 
